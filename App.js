@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react"
+import { Provider as PaperProvider } from "react-native-paper"
+
+import { Provider } from "react-redux"
+import store from "./redux/store"
+
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import SelectCategoryScreen from "./containers/SelectCategory"
+import ModeScreen from "./containers/DifficultyMode"
+import QuizDisplayScreen from "./containers/QuizDisplay"
+
+import { theme } from "./utils/theme"
+
+const Stack = createStackNavigator()
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<Provider store={store}>
+			<PaperProvider theme={theme}>
+				<NavigationContainer>
+					<Stack.Navigator initialRouteName="Mode">
+						<Stack.Screen name="Mode" component={ModeScreen} />
+						<Stack.Screen name="Quiz" component={QuizDisplayScreen} />
+						<Stack.Screen
+							name="Category"
+							component={SelectCategoryScreen}
+						/>
+					</Stack.Navigator>
+				</NavigationContainer>
+			</PaperProvider>
+		</Provider>
+	)
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
