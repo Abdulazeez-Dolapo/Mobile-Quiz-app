@@ -52,7 +52,7 @@ export const getQuestions = (
 			payload: questions,
 		})
 	} catch (error) {
-		console.log(error.response)
+		console.log(error)
 		dispatch(setErrors(error.response))
 	}
 }
@@ -71,7 +71,6 @@ export const setDifficulty = difficulty => dispatch => {
 }
 
 export const setCategory = category => dispatch => {
-	console.log("category", category)
 	dispatch({ type: SET_CATEGORY, payload: category })
 }
 

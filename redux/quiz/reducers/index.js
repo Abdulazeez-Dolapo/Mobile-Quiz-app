@@ -46,7 +46,6 @@ const initialState = {
 export default (state = initialState, { payload, type }) => {
 	switch (type) {
 		case SET_CATEGORY:
-			console.log("object", payload)
 			return {
 				...state,
 				category: state.categories.find(
