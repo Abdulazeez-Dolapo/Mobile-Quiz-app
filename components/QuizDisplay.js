@@ -6,11 +6,13 @@ import {
 	Text,
 	ActivityIndicator,
 	RefreshControl,
+	Alert,
 } from "react-native"
 
 import { Button } from "react-native-paper"
 
 import QuizCard from "./QuizCard"
+import Timer from "./Timer"
 
 const QuizDisplay = props => {
 	const {
@@ -59,11 +61,18 @@ const QuizDisplay = props => {
 		setIndex(newIndex)
 	}
 
+	const submit = () => {
+		Alert.alert("Hello there")
+	}
+
 	const markup = loading ? (
 		<ActivityIndicator animating={loading} color="red" />
 	) : questions.length > 0 ? (
 		<View>
+			<Timer submit={submit} />
+
 			<QuizCard quiz={currentQuiz} />
+
 			<View>
 				<Button
 					disabled={index < 1}

@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { View, Text, FlatList } from "react-native"
+import { Text, FlatList } from "react-native"
 
 const QuizCard = props => {
 	const {
@@ -8,15 +8,12 @@ const QuizCard = props => {
 	} = props
 
 	return (
-		<View>
-			<Text>{question}</Text>
-
-			<FlatList
-				data={options}
-				renderItem={({ item }) => <Text>{item}</Text>}
-				keyExtractor={item => item}
-			/>
-		</View>
+		<FlatList
+			ListHeaderComponent={<Text>{question}</Text>}
+			data={options}
+			renderItem={({ item }) => <Text>{item}</Text>}
+			keyExtractor={item => item}
+		/>
 	)
 }
 
