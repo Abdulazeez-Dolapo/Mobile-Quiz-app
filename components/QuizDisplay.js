@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import { View, Text, ActivityIndicator } from "react-native"
+import {
+	View,
+	ScrollView,
+	Text,
+	ActivityIndicator,
+	RefreshControl,
+} from "react-native"
 
 import { Button } from "react-native-paper"
 
@@ -19,6 +25,7 @@ const QuizDisplay = props => {
 
 	const [currentQuiz, setCurrentQuiz] = useState({})
 	const [index, setIndex] = useState(0)
+	const [refreshing, setRefreshing] = useState(false)
 
 	useEffect(() => {
 		getQuestions(numberOfQuestions, category.value, difficulty)
@@ -29,6 +36,12 @@ const QuizDisplay = props => {
 		if (questions.length < 1) return
 		setCurrentQuiz(questions[index])
 	}, [questions, index])
+
+	const onRefresh = async () => {
+		setRefreshing(true)
+		await getQuestions(numberOfQuestions, category.value, difficulty)
+		setRefreshing(false)
+	}
 
 	const navigateToHome = () => {
 		navigation.navigate("Mode")
@@ -72,14 +85,22 @@ const QuizDisplay = props => {
 	) : (
 		<Text>
 			There are no questions found for this quiz configuration, click{" "}
-			<Button mode="text" onPress={() => navigateToHome()}>
+			<Button mode="outlined" onPress={() => navigateToHome()}>
 				Here
 			</Button>{" "}
-			to go back and try again
+			to go back or pull down the screen to try again
 		</Text>
 	)
 
-	return <View>{markup}</View>
+	return (
+		<ScrollView
+			refreshControl={
+				<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+			}
+		>
+			{markup}
+		</ScrollView>
+	)
 }
 
 QuizDisplay.propTypes = {
