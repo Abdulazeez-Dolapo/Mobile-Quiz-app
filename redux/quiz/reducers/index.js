@@ -6,6 +6,7 @@ import {
 	SET_LOADING,
 	SET_ERRORS,
 	CLEAR_ERRORS,
+	SELECT_ANSWER,
 } from "../types"
 
 const initialState = {
@@ -76,6 +77,18 @@ export default (state = initialState, { payload, type }) => {
 			return {
 				...state,
 				loading: true,
+			}
+
+		case SELECT_ANSWER:
+			return {
+				...state,
+				questions: state.questions.map(question => {
+					if (question.id === payload.questionId) {
+						question.chosenAnswer = payload.chosenAnswer
+					}
+
+					return question
+				}),
 			}
 
 		case SET_ERRORS:

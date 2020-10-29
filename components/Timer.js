@@ -1,13 +1,19 @@
 import React, { Component } from "react"
 import { View, Text } from "react-native"
+import PropTypes from "prop-types"
 
 export default class Timer extends Component {
 	state = {
 		minutes: 0,
-		seconds: 10,
+		seconds: 0,
 	}
 
 	componentDidMount() {
+		this.setState({
+			minutes: this.props.minutes,
+			seconds: this.props.seconds,
+		})
+
 		this.timer = setInterval(() => {
 			const { seconds, minutes } = this.state
 
@@ -41,9 +47,15 @@ export default class Timer extends Component {
 		return (
 			<View>
 				<Text>
-					{minutes || 0} : {seconds < 10 ? `0${seconds}` : seconds}
+					{minutes < 10 ? `0${minutes}` : minutes} :{" "}
+					{seconds < 10 ? `0${seconds}` : seconds}
 				</Text>
 			</View>
 		)
 	}
+}
+
+Timer.propTypes = {
+	minutes: PropTypes.number.isRequired,
+	seconds: PropTypes.number.isRequired,
 }

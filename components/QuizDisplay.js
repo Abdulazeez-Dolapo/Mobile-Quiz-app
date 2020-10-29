@@ -11,7 +11,7 @@ import {
 
 import { Button } from "react-native-paper"
 
-import QuizCard from "./QuizCard"
+import QuizCard from "../containers/QuizCard"
 import Timer from "./Timer"
 
 const QuizDisplay = props => {
@@ -40,6 +40,9 @@ const QuizDisplay = props => {
 	}, [questions, index])
 
 	const onRefresh = async () => {
+		// Do not refresh if there are quiz questions already available
+		if (questions.length > 0) return
+
 		setRefreshing(true)
 		await getQuestions(numberOfQuestions, category.value, difficulty)
 		setRefreshing(false)
@@ -62,16 +65,16 @@ const QuizDisplay = props => {
 	}
 
 	const submit = () => {
-		Alert.alert("Hello there")
+		// Alert.alert("Hello there")
 	}
 
 	const markup = loading ? (
 		<ActivityIndicator animating={loading} color="red" />
 	) : questions.length > 0 ? (
 		<View>
-			<Timer submit={submit} />
+			<Timer submit={submit} minutes={10} seconds={0} />
 
-			<QuizCard quiz={currentQuiz} />
+			<QuizCard quiz={currentQuiz} index={index} />
 
 			<View>
 				<Button
@@ -88,6 +91,20 @@ const QuizDisplay = props => {
 					onPress={() => next()}
 				>
 					Next
+				</Button>
+			</View>
+
+			<View>
+				<Button
+					color="red"
+					mode="contained"
+					onPress={() => navigateToHome()}
+				>
+					Cancel
+				</Button>
+
+				<Button color="green" mode="contained" onPress={() => submit()}>
+					Submit
 				</Button>
 			</View>
 		</View>
