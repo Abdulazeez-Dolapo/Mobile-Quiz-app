@@ -6,13 +6,13 @@ import {
 	Text,
 	ActivityIndicator,
 	RefreshControl,
-	Alert,
 } from "react-native"
 
 import { Button } from "react-native-paper"
 
 import QuizCard from "../containers/QuizCard"
 import Timer from "./Timer"
+import Modal from "./Modal"
 
 const QuizDisplay = props => {
 	const {
@@ -29,6 +29,16 @@ const QuizDisplay = props => {
 	const [index, setIndex] = useState(0)
 	const [refreshing, setRefreshing] = useState(false)
 
+	// Modal props
+	const [modalStatus, setModalStatus] = useState(false)
+	const [modalText, setModalText] = useState("")
+	// let
+	const [
+		handleModalConfirmation,
+		setHandleModalConfirmation,
+	] = useState(() => {})
+
+	// Watchers (The equivalence of watchers in Vue.js)
 	useEffect(() => {
 		getQuestions(numberOfQuestions, category.value, difficulty)
 	}, [])
@@ -39,6 +49,7 @@ const QuizDisplay = props => {
 		setCurrentQuiz(questions[index])
 	}, [questions, index])
 
+	// Helper functions
 	const onRefresh = async () => {
 		// Do not refresh if there are quiz questions already available
 		if (questions.length > 0) return
@@ -48,7 +59,12 @@ const QuizDisplay = props => {
 		setRefreshing(false)
 	}
 
+	const hideModal = () => {
+		setModalStatus(false)
+	}
+
 	const navigateToHome = () => {
+		hideModal()
 		navigation.navigate("Mode")
 	}
 
@@ -64,50 +80,80 @@ const QuizDisplay = props => {
 		setIndex(newIndex)
 	}
 
-	const submit = () => {
-		// Alert.alert("Hello there")
+	const openSubmitModal = () => {
+		setModalStatus(true)
+		setModalText(
+			"This quiz will end and cannot be continued. Are you sure you want to submit?"
+		)
+		setHandleModalConfirmation(() => handleQuizSubmit)
+	}
+
+	const openCancelModal = () => {
+		setHandleModalConfirmation(() => navigateToHome)
+		setModalStatus(true)
+		setModalText(
+			"You have not submitted this quiz and cannot continue. Are you sure you want to cancel?"
+		)
+	}
+
+	const handleQuizSubmit = () => {
+		console.log(questions)
+		hideModal()
 	}
 
 	const markup = loading ? (
 		<ActivityIndicator animating={loading} color="red" />
 	) : questions.length > 0 ? (
-		<View>
-			<Timer submit={submit} minutes={10} seconds={0} />
-
-			<QuizCard quiz={currentQuiz} index={index} />
-
+		<>
 			<View>
-				<Button
-					disabled={index < 1}
-					mode="contained"
-					onPress={() => previous()}
-				>
-					Previous
-				</Button>
+				<Timer submit={handleQuizSubmit} minutes={10} seconds={0} />
 
-				<Button
-					disabled={index === questions.length - 1}
-					mode="contained"
-					onPress={() => next()}
-				>
-					Next
-				</Button>
+				<QuizCard quiz={currentQuiz} index={index} />
+
+				<View>
+					<Button
+						disabled={index < 1}
+						mode="contained"
+						onPress={() => previous()}
+					>
+						Previous
+					</Button>
+
+					<Button
+						disabled={index === questions.length - 1}
+						mode="contained"
+						onPress={() => next()}
+					>
+						Next
+					</Button>
+				</View>
+
+				<View>
+					<Button
+						color="red"
+						mode="contained"
+						onPress={() => openCancelModal()}
+					>
+						Cancel
+					</Button>
+
+					<Button
+						color="green"
+						mode="contained"
+						onPress={() => openSubmitModal()}
+					>
+						Submit
+					</Button>
+				</View>
 			</View>
 
-			<View>
-				<Button
-					color="red"
-					mode="contained"
-					onPress={() => navigateToHome()}
-				>
-					Cancel
-				</Button>
-
-				<Button color="green" mode="contained" onPress={() => submit()}>
-					Submit
-				</Button>
-			</View>
-		</View>
+			<Modal
+				modalStatus={modalStatus}
+				handleConfirmation={handleModalConfirmation}
+				modalText={modalText}
+				setModalStatus={setModalStatus}
+			/>
+		</>
 	) : (
 		<Text>
 			There are no questions found for this quiz configuration, click{" "}
