@@ -95,10 +95,11 @@ const QuizDisplay = props => {
 		)
 	}
 
-	const handleQuizSubmit = () => {
+	const handleQuizSubmit = async () => {
 		console.log(questions)
 		hideModal()
-		compileResults()
+		await compileResults()
+		navigation.navigate("Results")
 	}
 
 	const markup = loading ? (
@@ -106,7 +107,13 @@ const QuizDisplay = props => {
 	) : questions.length > 0 ? (
 		<>
 			<View>
-				<Timer submit={handleQuizSubmit} minutes={10} seconds={0} />
+				<View>
+					<Timer submit={handleQuizSubmit} minutes={10} seconds={0} />
+
+					<Text>
+						{index + 1}/{numberOfQuestions}
+					</Text>
+				</View>
 
 				<QuizCard quiz={currentQuiz} index={index} />
 
