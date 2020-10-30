@@ -11,6 +11,7 @@ import {
 	SET_CATEGORY,
 	SET_NUMBER_OF_QUESTIONS,
 	SELECT_ANSWER,
+	COMPILE_RESULTS,
 } from "../types"
 
 export const getQuestions = (
@@ -29,7 +30,6 @@ export const getQuestions = (
 		const questions = data.results.map(question => {
 			const index = Math.floor(Math.random() * (3 - 0 + 1))
 			const formattedQuestion = {
-				// show: false,
 				id: Math.random().toString(16).slice(2, -1),
 				correctAnswer: he.decode(question.correct_answer),
 				chosenAnswer: "",
@@ -91,4 +91,8 @@ export const setErrors = errors => dispatch => {
 
 export const setLoading = () => dispatch => {
 	dispatch({ type: SET_LOADING })
+}
+
+export const compileResults = () => dispatch => {
+	dispatch({ type: COMPILE_RESULTS })
 }

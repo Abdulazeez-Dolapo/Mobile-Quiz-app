@@ -7,6 +7,7 @@ import {
 	SET_ERRORS,
 	CLEAR_ERRORS,
 	SELECT_ANSWER,
+	COMPILE_RESULTS,
 } from "../types"
 
 const initialState = {
@@ -42,7 +43,10 @@ const initialState = {
 	],
 	errors: [],
 	loading: false,
+	score: 0,
 }
+
+// import { getCorrectAnswerArray } from "../selectors"
 
 export default (state = initialState, { payload, type }) => {
 	switch (type) {
@@ -102,6 +106,16 @@ export default (state = initialState, { payload, type }) => {
 			return {
 				...state,
 				errors: [],
+			}
+
+		case COMPILE_RESULTS:
+			const correctAnswersArray = state.questions.filter(
+				question => question.correctAnswer == question.chosenAnswer
+			)
+
+			return {
+				...state,
+				score: correctAnswersArray.length,
 			}
 
 		default:

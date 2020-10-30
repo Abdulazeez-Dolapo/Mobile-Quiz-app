@@ -23,6 +23,7 @@ const QuizDisplay = props => {
 		category,
 		difficulty,
 		navigation,
+		compileResults,
 	} = props
 
 	const [currentQuiz, setCurrentQuiz] = useState({})
@@ -32,13 +33,11 @@ const QuizDisplay = props => {
 	// Modal props
 	const [modalStatus, setModalStatus] = useState(false)
 	const [modalText, setModalText] = useState("")
-	// let
 	const [
 		handleModalConfirmation,
 		setHandleModalConfirmation,
 	] = useState(() => {})
 
-	// Watchers (The equivalence of watchers in Vue.js)
 	useEffect(() => {
 		getQuestions(numberOfQuestions, category.value, difficulty)
 	}, [])
@@ -99,6 +98,7 @@ const QuizDisplay = props => {
 	const handleQuizSubmit = () => {
 		console.log(questions)
 		hideModal()
+		compileResults()
 	}
 
 	const markup = loading ? (
@@ -182,6 +182,7 @@ QuizDisplay.propTypes = {
 	difficulty: PropTypes.string.isRequired,
 	getQuestions: PropTypes.func.isRequired,
 	loading: PropTypes.bool.isRequired,
+	compileResults: PropTypes.func.isRequired,
 }
 
 export default QuizDisplay

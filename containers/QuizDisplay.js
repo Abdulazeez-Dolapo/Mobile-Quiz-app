@@ -1,6 +1,6 @@
 import QuizDisplay from "../components/QuizDisplay"
 import { connect } from "react-redux"
-import { getQuestions } from "../redux/quiz/actions"
+import { getQuestions, compileResults } from "../redux/quiz/actions"
 
 const mapStateToProps = state => ({
 	questions: state.quiz.questions,
@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	getQuestions: (numberOfQuestions, category, difficulty) =>
 		dispatch(getQuestions(numberOfQuestions, category, difficulty)),
+	compileResults: () => dispatch(compileResults()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizDisplay)
