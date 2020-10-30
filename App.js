@@ -10,6 +10,7 @@ import SelectCategoryScreen from "./containers/SelectCategory"
 import ModeScreen from "./containers/DifficultyMode"
 import QuizDisplayScreen from "./containers/QuizDisplay"
 import ResultsDisplayScreen from "./containers/ResultsDisplay"
+import CorrectAnswersScreen from "./containers/CorrectAnswers"
 
 import { theme } from "./utils/theme"
 
@@ -30,6 +31,16 @@ export default function App() {
 						<Stack.Screen
 							name="Results"
 							component={ResultsDisplayScreen}
+							options={{
+								headerLeft: null,
+							}}
+						/>
+						<Stack.Screen
+							name="Correct-Answers"
+							component={CorrectAnswersScreen}
+							options={{
+								headerLeft: null,
+							}}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>
