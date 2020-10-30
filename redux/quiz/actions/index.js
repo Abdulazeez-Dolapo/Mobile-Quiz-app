@@ -12,6 +12,7 @@ import {
 	SET_NUMBER_OF_QUESTIONS,
 	SELECT_ANSWER,
 	COMPILE_RESULTS,
+	QUIT_QUIZ,
 } from "../types"
 
 export const getQuestions = (
@@ -95,4 +96,8 @@ export const setLoading = () => dispatch => {
 
 export const compileResults = () => dispatch => {
 	dispatch({ type: COMPILE_RESULTS })
+}
+
+export const quitQuiz = () => dispatch => {
+	dispatch({ type: QUIT_QUIZ })
 }

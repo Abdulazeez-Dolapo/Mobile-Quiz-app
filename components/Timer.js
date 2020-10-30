@@ -38,6 +38,10 @@ export default class Timer extends Component {
 	}
 
 	componentWillUnmount() {
+		this.setState({
+			minutes: 0,
+			seconds: 0,
+		})
 		clearInterval(this.timer)
 	}
 

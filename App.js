@@ -9,6 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import SelectCategoryScreen from "./containers/SelectCategory"
 import ModeScreen from "./containers/DifficultyMode"
 import QuizDisplayScreen from "./containers/QuizDisplay"
+import ResultsDisplayScreen from "./containers/ResultsDisplay"
 
 import { theme } from "./utils/theme"
 
@@ -25,6 +26,10 @@ export default function App() {
 						<Stack.Screen
 							name="Category"
 							component={SelectCategoryScreen}
+						/>
+						<Stack.Screen
+							name="Results"
+							component={ResultsDisplayScreen}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>

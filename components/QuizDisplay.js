@@ -24,6 +24,7 @@ const QuizDisplay = props => {
 		difficulty,
 		navigation,
 		compileResults,
+		quitQuiz,
 	} = props
 
 	const [currentQuiz, setCurrentQuiz] = useState({})
@@ -62,8 +63,9 @@ const QuizDisplay = props => {
 		setModalStatus(false)
 	}
 
-	const navigateToHome = () => {
+	const cancelQuiz = async () => {
 		hideModal()
+		await quitQuiz()
 		navigation.navigate("Mode")
 	}
 
@@ -88,7 +90,7 @@ const QuizDisplay = props => {
 	}
 
 	const openCancelModal = () => {
-		setHandleModalConfirmation(() => navigateToHome)
+		setHandleModalConfirmation(() => cancelQuiz)
 		setModalStatus(true)
 		setModalText(
 			"You have not submitted this quiz and cannot continue. Are you sure you want to cancel?"
@@ -141,7 +143,7 @@ const QuizDisplay = props => {
 						mode="contained"
 						onPress={() => openCancelModal()}
 					>
-						Cancel
+						Quit Quiz
 					</Button>
 
 					<Button
@@ -164,7 +166,7 @@ const QuizDisplay = props => {
 	) : (
 		<Text>
 			There are no questions found for this quiz configuration, click{" "}
-			<Button mode="outlined" onPress={() => navigateToHome()}>
+			<Button mode="outlined" onPress={() => cancelQuiz()}>
 				Here
 			</Button>{" "}
 			to go back or pull down the screen to try again
@@ -190,6 +192,7 @@ QuizDisplay.propTypes = {
 	getQuestions: PropTypes.func.isRequired,
 	loading: PropTypes.bool.isRequired,
 	compileResults: PropTypes.func.isRequired,
+	quitQuiz: PropTypes.func.isRequired,
 }
 
 export default QuizDisplay

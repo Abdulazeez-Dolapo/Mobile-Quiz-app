@@ -8,6 +8,7 @@ import {
 	CLEAR_ERRORS,
 	SELECT_ANSWER,
 	COMPILE_RESULTS,
+	QUIT_QUIZ,
 } from "../types"
 
 const initialState = {
@@ -45,8 +46,6 @@ const initialState = {
 	loading: false,
 	score: 0,
 }
-
-// import { getCorrectAnswerArray } from "../selectors"
 
 export default (state = initialState, { payload, type }) => {
 	switch (type) {
@@ -118,6 +117,7 @@ export default (state = initialState, { payload, type }) => {
 				score: correctAnswersArray.length,
 			}
 
+		case QUIT_QUIZ:
 		default:
 			return state
 	}
