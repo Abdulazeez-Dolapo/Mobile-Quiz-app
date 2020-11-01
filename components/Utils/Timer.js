@@ -1,6 +1,8 @@
 import React, { Component } from "react"
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import PropTypes from "prop-types"
+
+import { Subheading } from "react-native-paper"
 
 export default class Timer extends Component {
 	state = {
@@ -49,15 +51,24 @@ export default class Timer extends Component {
 		const { minutes, seconds } = this.state
 
 		return (
-			<View>
-				<Text>
-					{minutes < 10 ? `0${minutes}` : minutes} :{" "}
-					{seconds < 10 ? `0${seconds}` : seconds}
-				</Text>
-			</View>
+			<Subheading style={minutes >= 5 ? styles.timer : styles.timeout}>
+				{minutes < 10 ? `0${minutes}` : minutes} :{" "}
+				{seconds < 10 ? `0${seconds}` : seconds}
+			</Subheading>
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+	timer: {
+		color: "white",
+		fontWeight: "700",
+	},
+	timeout: {
+		color: "red",
+		fontWeight: "700",
+	},
+})
 
 Timer.propTypes = {
 	minutes: PropTypes.number.isRequired,
