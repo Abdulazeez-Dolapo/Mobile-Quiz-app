@@ -6,15 +6,28 @@ import {
 	Text,
 	ActivityIndicator,
 	RefreshControl,
+	BackHandler,
 } from "react-native"
 
 import { Button } from "react-native-paper"
 
-import QuizCard from "../containers/QuizCard"
-import Timer from "./Timer"
-import Modal from "./Modal"
+import QuizCard from "../../containers/QuizCard"
+import Timer from "../Utils/Timer"
+import Modal from "../Utils/Modal"
 
 const QuizDisplay = props => {
+	// Disable back button
+	const backAction = () => {
+		return true
+	}
+
+	useEffect(() => {
+		BackHandler.addEventListener("hardwareBackPress", backAction)
+
+		return () =>
+			BackHandler.removeEventListener("hardwareBackPress", backAction)
+	}, [])
+
 	const {
 		loading,
 		getQuestions,

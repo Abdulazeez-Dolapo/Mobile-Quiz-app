@@ -23,7 +23,13 @@ export default function App() {
 				<NavigationContainer>
 					<Stack.Navigator initialRouteName="Mode">
 						<Stack.Screen name="Mode" component={ModeScreen} />
-						<Stack.Screen name="Quiz" component={QuizDisplayScreen} />
+						<Stack.Screen
+							name="Quiz"
+							component={QuizDisplayScreen}
+							options={{
+								headerLeft: null,
+							}}
+						/>
 						<Stack.Screen
 							name="Category"
 							component={SelectCategoryScreen}

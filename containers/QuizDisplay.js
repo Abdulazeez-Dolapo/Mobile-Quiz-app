@@ -1,4 +1,4 @@
-import QuizDisplay from "../components/QuizDisplay"
+import QuizDisplay from "../components/Screens/QuizDisplay"
 import { connect } from "react-redux"
 import { getQuestions, compileResults, quitQuiz } from "../redux/quiz/actions"
 

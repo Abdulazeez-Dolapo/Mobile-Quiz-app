@@ -1,4 +1,4 @@
-import QuizCard from "../components/QuizCard"
+import QuizCard from "../components/Cards/QuizCard"
 import { connect } from "react-redux"
 import { selectAnswer } from "../redux/quiz/actions"
 

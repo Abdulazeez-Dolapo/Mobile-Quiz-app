@@ -1,4 +1,4 @@
-import ResultsDisplay from "../components/ResultsDisplay"
+import ResultsDisplay from "../components/Screens/ResultsDisplay"
 import { connect } from "react-redux"
 import { quitQuiz } from "../redux/quiz/actions"
 

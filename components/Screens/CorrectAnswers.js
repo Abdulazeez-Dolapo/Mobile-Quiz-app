@@ -1,11 +1,13 @@
 import React, { useEffect } from "react"
-import { View, Text, BackHandler } from "react-native"
+import { View, Text, BackHandler, FlatList } from "react-native"
 import PropTypes from "prop-types"
 
 import { Button } from "react-native-paper"
 
+import CorrectAnswerCard from "../Cards/CorrectAnswerCard"
+
 const CorrectAnswers = props => {
-	const { numberOfQuestions, score, quitQuiz, navigation } = props
+	const { numberOfQuestions, score, quitQuiz, navigation, questions } = props
 
 	const backAction = () => {
 		return true
@@ -28,6 +30,12 @@ const CorrectAnswers = props => {
 			<Text>
 				{score}/{numberOfQuestions}
 			</Text>
+
+			<FlatList
+				data={questions}
+				renderItem={({ item }) => <CorrectAnswerCard quiz={item} />}
+				keyExtractor={item => item.id}
+			/>
 
 			<View>
 				<Button color="green" mode="contained" onPress={() => reset()}>

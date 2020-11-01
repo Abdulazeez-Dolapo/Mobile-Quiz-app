@@ -1,4 +1,4 @@
-import DifficultyMode from "../components/DifficultyMode"
+import DifficultyMode from "../components/Screens/DifficultyMode"
 import { connect } from "react-redux"
 import { setDifficulty } from "../redux/quiz/actions"
 
