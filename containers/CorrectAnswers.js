@@ -1,4 +1,4 @@
-import CorrectAnswers from "../components/CorrectAnswers"
+import CorrectAnswers from "../components/Screens/CorrectAnswers"
 import { connect } from "react-redux"
 import { quitQuiz } from "../redux/quiz/actions"
 

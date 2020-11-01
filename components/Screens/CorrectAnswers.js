@@ -33,7 +33,9 @@ const CorrectAnswers = props => {
 
 			<FlatList
 				data={questions}
-				renderItem={({ item }) => <CorrectAnswerCard quiz={item} />}
+				renderItem={({ item, index }) => (
+					<CorrectAnswerCard quiz={item} index={index} />
+				)}
 				keyExtractor={item => item.id}
 			/>
 
