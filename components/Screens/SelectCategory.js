@@ -1,5 +1,5 @@
 import React from "react"
-import { ScrollView, StyleSheet, FlatList } from "react-native"
+import { ScrollView, StyleSheet, View, Pressable } from "react-native"
 import PropTypes from "prop-types"
 import CategoryCard from "../Cards/CategoryCard"
 
@@ -7,25 +7,47 @@ const SelectCategory = props => {
 	const { navigation, setCategory, categories } = props
 
 	const handlePress = async value => {
+		// console.log("object")
 		await setCategory(value)
 		navigation.navigate("Quiz")
 	}
 
 	const list = categories.map(category => (
-		<CategoryCard
-			category={category}
-			key={category.value}
+		<Pressable
+			style={styles.cardContainer}
 			onPress={() => handlePress(category.value)}
-		/>
+			key={category.value}
+		>
+			<CategoryCard category={category} />
+		</Pressable>
 	))
 
-	return <ScrollView style={styles.container}>{list}</ScrollView>
+	return (
+		<ScrollView style={styles.categoryContainer}>
+			<View style={styles.row}>{list}</View>
+		</ScrollView>
+	)
 }
 
 const styles = StyleSheet.create({
-	container: {
+	categoryContainer: {
 		backgroundColor: "#141A33",
 		flex: 1,
+	},
+	row: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		alignItems: "center",
+		justifyContent: "space-evenly",
+	},
+	cardContainer: {
+		backgroundColor: "white",
+		borderRadius: 10,
+		width: "42%",
+		justifyContent: "center",
+		height: 135,
+		padding: 10,
+		marginVertical: 10,
 	},
 })
 

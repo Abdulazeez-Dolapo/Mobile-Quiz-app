@@ -31,8 +31,13 @@ export default function App() {
 							}}
 						/>
 						<Stack.Screen
-							name="Category"
+							name="Categories"
 							component={SelectCategoryScreen}
+							options={{
+								headerStyle: {
+									backgroundColor: "#8663FF",
+								},
+							}}
 						/>
 						<Stack.Screen
 							name="Results"
