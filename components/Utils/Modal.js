@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
-import { Modal, Portal, Text, Button, Provider } from "react-native-paper"
+import { View, StyleSheet } from "react-native"
+
+import { Modal, Portal, Subheading, Button, Provider } from "react-native-paper"
 
 const QuizModal = props => {
 	const { modalText, handleConfirmation, modalStatus, setModalStatus } = props
@@ -27,28 +29,48 @@ const QuizModal = props => {
 					onDismiss={hideModal}
 					contentContainerStyle={containerStyle}
 				>
-					<Text>{modalText}</Text>
+					<Subheading style={{ textAlign: "center" }}>
+						{modalText}
+					</Subheading>
 
-					<Button
-						color="red"
-						style={{ marginTop: 30 }}
-						onPress={() => hideModal()}
-					>
-						No
-					</Button>
+					<View style={styles.row}>
+						<Button
+							mode="contained"
+							color="red"
+							style={{ marginTop: 30 }}
+							onPress={() => hideModal()}
+						>
+							No
+						</Button>
 
-					<Button
-						color="green"
-						style={{ marginTop: 30 }}
-						onPress={() => handleConfirmation()}
-					>
-						Yes
-					</Button>
+						<Button
+							mode="contained"
+							color="green"
+							style={{ marginTop: 30 }}
+							onPress={() => handleConfirmation()}
+						>
+							Yes
+						</Button>
+					</View>
 				</Modal>
 			</Portal>
 		</Provider>
 	)
 }
+
+const styles = StyleSheet.create({
+	row: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		alignItems: "center",
+		justifyContent: "space-evenly",
+	},
+	buttons: {
+		width: 140,
+		height: 45,
+		borderRadius: 15,
+	},
+})
 
 QuizModal.propTypes = {
 	modalStatus: PropTypes.bool.isRequired,
