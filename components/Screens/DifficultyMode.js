@@ -11,7 +11,7 @@ export default function DifficultyMode({ navigation, setDifficulty }) {
 
 	const handlePress = value => {
 		setDifficulty(value)
-		navigation.navigate("Category")
+		navigation.navigate("Categories")
 	}
 
 	const list = difficulties.map(difficulty => (

@@ -9,6 +9,8 @@ import { createStackNavigator } from "@react-navigation/stack"
 import SelectCategoryScreen from "./containers/SelectCategory"
 import ModeScreen from "./containers/DifficultyMode"
 import QuizDisplayScreen from "./containers/QuizDisplay"
+import ResultsDisplayScreen from "./containers/ResultsDisplay"
+import CorrectAnswersScreen from "./containers/CorrectAnswers"
 
 import { theme } from "./utils/theme"
 
@@ -19,12 +21,39 @@ export default function App() {
 		<Provider store={store}>
 			<PaperProvider theme={theme}>
 				<NavigationContainer>
-					<Stack.Navigator initialRouteName="Mode">
+					<Stack.Navigator
+						initialRouteName="Mode"
+						screenOptions={{
+							headerStyle: {
+								backgroundColor: "#8663FF",
+							},
+						}}
+					>
 						<Stack.Screen name="Mode" component={ModeScreen} />
-						<Stack.Screen name="Quiz" component={QuizDisplayScreen} />
 						<Stack.Screen
-							name="Category"
+							name="Quiz"
+							component={QuizDisplayScreen}
+							options={{
+								headerLeft: null,
+							}}
+						/>
+						<Stack.Screen
+							name="Categories"
 							component={SelectCategoryScreen}
+						/>
+						<Stack.Screen
+							name="Results"
+							component={ResultsDisplayScreen}
+							options={{
+								headerLeft: null,
+							}}
+						/>
+						<Stack.Screen
+							name="Correct-Answers"
+							component={CorrectAnswersScreen}
+							options={{
+								headerLeft: null,
+							}}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>

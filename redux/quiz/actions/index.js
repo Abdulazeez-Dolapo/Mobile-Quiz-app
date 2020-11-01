@@ -1,4 +1,4 @@
-// This library - he - helps to convert html entities in the questions and answers to utf-8 characters
+// This library helps to convert html entities in the questions and answers to utf-8 characters
 import he from "he"
 
 import { fetchQuestions } from "../../../services/quiz"
@@ -10,6 +10,9 @@ import {
 	SET_DIFFICULTY,
 	SET_CATEGORY,
 	SET_NUMBER_OF_QUESTIONS,
+	SELECT_ANSWER,
+	COMPILE_RESULTS,
+	QUIT_QUIZ,
 } from "../types"
 
 export const getQuestions = (
@@ -36,6 +39,7 @@ export const getQuestions = (
 					he.decode(option)
 				),
 			}
+
 			formattedQuestion.options.splice(
 				index,
 				0,
@@ -74,6 +78,10 @@ export const setCategory = category => dispatch => {
 	dispatch({ type: SET_CATEGORY, payload: category })
 }
 
+export const selectAnswer = (chosenAnswer, questionId) => dispatch => {
+	dispatch({ type: SELECT_ANSWER, payload: { chosenAnswer, questionId } })
+}
+
 export const clearErrors = () => dispatch => {
 	dispatch({ type: CLEAR_ERRORS })
 }
@@ -84,4 +92,12 @@ export const setErrors = errors => dispatch => {
 
 export const setLoading = () => dispatch => {
 	dispatch({ type: SET_LOADING })
+}
+
+export const compileResults = () => dispatch => {
+	dispatch({ type: COMPILE_RESULTS })
+}
+
+export const quitQuiz = () => dispatch => {
+	dispatch({ type: QUIT_QUIZ })
 }

@@ -1,4 +1,4 @@
-import SelectCategory from "../components/SelectCategory"
+import SelectCategory from "../components/Screens/SelectCategory"
 import { connect } from "react-redux"
 import { setCategory } from "../redux/quiz/actions"
 
