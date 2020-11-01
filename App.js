@@ -21,7 +21,14 @@ export default function App() {
 		<Provider store={store}>
 			<PaperProvider theme={theme}>
 				<NavigationContainer>
-					<Stack.Navigator initialRouteName="Mode">
+					<Stack.Navigator
+						initialRouteName="Mode"
+						screenOptions={{
+							headerStyle: {
+								backgroundColor: "#8663FF",
+							},
+						}}
+					>
 						<Stack.Screen name="Mode" component={ModeScreen} />
 						<Stack.Screen
 							name="Quiz"
@@ -33,11 +40,6 @@ export default function App() {
 						<Stack.Screen
 							name="Categories"
 							component={SelectCategoryScreen}
-							options={{
-								headerStyle: {
-									backgroundColor: "#8663FF",
-								},
-							}}
 						/>
 						<Stack.Screen
 							name="Results"

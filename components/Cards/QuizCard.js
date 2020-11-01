@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Text, FlatList, View } from "react-native"
-import { RadioButton } from "react-native-paper"
+import { Text, FlatList, View, StyleSheet } from "react-native"
+import { RadioButton, Subheading } from "react-native-paper"
 
 const QuizCard = props => {
 	const {
@@ -16,12 +16,15 @@ const QuizCard = props => {
 	}, [selectedAnswer])
 
 	useEffect(() => {
+		console.log(props.quiz)
 		setSelectedAnswer(chosenAnswer)
 	}, [props.quiz])
 
 	return (
-		<View>
-			<Text>{question}</Text>
+		<View style={styles.card}>
+			<Subheading style={{ ...styles.white, marginBottom: 20 }}>
+				{question}
+			</Subheading>
 
 			<RadioButton.Group
 				onValueChange={value => setSelectedAnswer(value)}
@@ -30,7 +33,24 @@ const QuizCard = props => {
 				<FlatList
 					data={options}
 					renderItem={({ item }) => (
-						<RadioButton.Item color="blue" label={item} value={item} />
+						<View
+							style={
+								selectedAnswer === item
+									? { ...styles.optionContainer, borderColor: "green" }
+									: { ...styles.optionContainer }
+							}
+						>
+							<RadioButton.Item
+								color="green"
+								label={item}
+								value={item}
+								labelStyle={
+									selectedAnswer === item
+										? { ...styles.green, ...styles.option }
+										: { ...styles.white, ...styles.option }
+								}
+							/>
+						</View>
 					)}
 					keyExtractor={item => item}
 				/>
@@ -38,6 +58,29 @@ const QuizCard = props => {
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	card: {
+		paddingTop: 20,
+	},
+	white: {
+		color: "white",
+	},
+	green: {
+		color: "green",
+	},
+	optionContainer: {
+		backgroundColor: "#181D36",
+		borderWidth: 1,
+		borderColor: "gray",
+		borderRadius: 20,
+		marginBottom: 10,
+	},
+	option: {
+		fontWeight: "100",
+		fontSize: 14,
+	},
+})
 
 QuizCard.propTypes = {
 	quiz: PropTypes.object.isRequired,
