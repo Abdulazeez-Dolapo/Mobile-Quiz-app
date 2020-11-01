@@ -1,7 +1,7 @@
 import React from "react"
-import { ScrollView } from "react-native"
+import { ScrollView, StyleSheet, FlatList } from "react-native"
 import PropTypes from "prop-types"
-import { List } from "react-native-paper"
+import CategoryCard from "../Cards/CategoryCard"
 
 const SelectCategory = props => {
 	const { navigation, setCategory, categories } = props
@@ -12,15 +12,22 @@ const SelectCategory = props => {
 	}
 
 	const list = categories.map(category => (
-		<List.Item
-			title={category.name}
+		<CategoryCard
+			category={category}
 			key={category.value}
 			onPress={() => handlePress(category.value)}
 		/>
 	))
 
-	return <ScrollView>{list}</ScrollView>
+	return <ScrollView style={styles.container}>{list}</ScrollView>
 }
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: "#141A33",
+		flex: 1,
+	},
+})
 
 SelectCategory.propTypes = {
 	categories: PropTypes.array.isRequired,

@@ -122,9 +122,13 @@ const QuizDisplay = props => {
 	) : questions.length > 0 ? (
 		<>
 			<View>
-				<View>
-					<Timer submit={handleQuizSubmit} minutes={10} seconds={0} />
+				<Timer submit={handleQuizSubmit} minutes={10} seconds={0} />
 
+				<View>
+					<Text>{category.name} Quiz</Text>
+				</View>
+
+				<View>
 					<Text>
 						{index + 1}/{numberOfQuestions}
 					</Text>
