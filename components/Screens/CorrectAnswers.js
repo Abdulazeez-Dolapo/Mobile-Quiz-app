@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { View, Text, BackHandler, FlatList } from "react-native"
+import { ScrollView, View, Text, BackHandler, FlatList } from "react-native"
 import PropTypes from "prop-types"
 
 import { Button } from "react-native-paper"
@@ -26,25 +26,31 @@ const CorrectAnswers = props => {
 	}
 
 	return (
-		<View>
-			<Text>
-				{score}/{numberOfQuestions}
-			</Text>
-
+		<ScrollView>
 			<FlatList
+				ListHeaderComponent={() => (
+					<Text>
+						{score}/{numberOfQuestions}
+					</Text>
+				)}
 				data={questions}
 				renderItem={({ item, index }) => (
 					<CorrectAnswerCard quiz={item} index={index} />
 				)}
 				keyExtractor={item => item.id}
+				ListFooterComponent={() => (
+					<View>
+						<Button
+							color="green"
+							mode="contained"
+							onPress={() => reset()}
+						>
+							Take new quiz
+						</Button>
+					</View>
+				)}
 			/>
-
-			<View>
-				<Button color="green" mode="contained" onPress={() => reset()}>
-					Take new quiz
-				</Button>
-			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
