@@ -19,6 +19,8 @@ const images = {
 	cartoon: require("./categories/cartoon.png"),
 	computer: require("./categories/computer.png"),
 	trophy: require("./background/trophy.png"),
+	welcome: require("./background/welcome.png"),
+	error: require("./background/error.png"),
 }
 
 export default images

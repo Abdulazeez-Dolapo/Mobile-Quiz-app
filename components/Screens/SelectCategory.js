@@ -7,7 +7,6 @@ const SelectCategory = props => {
 	const { navigation, setCategory, categories } = props
 
 	const handlePress = async value => {
-		// console.log("object")
 		await setCategory(value)
 		navigation.navigate("Quiz")
 	}
