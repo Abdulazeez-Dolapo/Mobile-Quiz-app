@@ -8,15 +8,16 @@ import {
 	RefreshControl,
 	BackHandler,
 	StyleSheet,
+	Image,
 } from "react-native"
 
-import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons"
-
+import { FontAwesome5 } from "@expo/vector-icons"
 import { Button, Subheading, Title } from "react-native-paper"
 
 import QuizCard from "../../containers/QuizCard"
 import Timer from "../Utils/Timer"
 import Modal from "../Utils/Modal"
+import ErrorDisplay from "../ErrorDisplay"
 
 const QuizDisplay = props => {
 	// Disable back button
@@ -205,13 +206,7 @@ const QuizDisplay = props => {
 			/>
 		</>
 	) : (
-		<Text>
-			There are no questions found for this quiz configuration, click{" "}
-			<Button mode="outlined" onPress={() => cancelQuiz()}>
-				Here
-			</Button>{" "}
-			to go back or pull down the screen to try again
-		</Text>
+		<ErrorDisplay cancelQuiz={cancelQuiz} />
 	)
 
 	return (
