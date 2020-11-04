@@ -4,6 +4,7 @@ import { View, StyleSheet, Image } from "react-native"
 import { List, Title } from "react-native-paper"
 
 import Images from "~assets/images"
+import { generalStyles } from "../../utils/styling"
 
 export default function DifficultyMode({ navigation, setDifficulty }) {
 	const difficulties = [
@@ -45,10 +46,7 @@ export default function DifficultyMode({ navigation, setDifficulty }) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#141A33",
-		flex: 1,
-	},
+	...generalStyles,
 	image: {
 		width: "100%",
 		height: 200,

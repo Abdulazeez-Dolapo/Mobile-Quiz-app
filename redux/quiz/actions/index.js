@@ -49,14 +49,11 @@ export const getQuestions = (
 			return formattedQuestion
 		})
 
-		console.log("format", questions)
-
 		dispatch({
 			type: SET_QUESTIONS,
 			payload: questions,
 		})
 	} catch (error) {
-		console.log(error)
 		dispatch(setErrors(error.response))
 	}
 }

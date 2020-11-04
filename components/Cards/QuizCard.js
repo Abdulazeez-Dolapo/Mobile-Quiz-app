@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Text, FlatList, View, StyleSheet } from "react-native"
+import { FlatList, View, StyleSheet } from "react-native"
+
 import { RadioButton, Subheading } from "react-native-paper"
+
+import { generalStyles } from "../../utils/styling"
 
 const QuizCard = props => {
 	const {
@@ -16,13 +19,12 @@ const QuizCard = props => {
 	}, [selectedAnswer])
 
 	useEffect(() => {
-		console.log(props.quiz)
 		setSelectedAnswer(chosenAnswer)
 	}, [props.quiz])
 
 	return (
 		<View style={styles.card}>
-			<Subheading style={{ ...styles.white, marginBottom: 20 }}>
+			<Subheading style={{ ...styles.whiteText, marginBottom: 20 }}>
 				{question}
 			</Subheading>
 
@@ -46,8 +48,8 @@ const QuizCard = props => {
 								value={item}
 								labelStyle={
 									selectedAnswer === item
-										? { ...styles.green, ...styles.option }
-										: { ...styles.white, ...styles.option }
+										? { ...styles.greenText, ...styles.option }
+										: { ...styles.whiteText, ...styles.option }
 								}
 							/>
 						</View>
@@ -60,14 +62,9 @@ const QuizCard = props => {
 }
 
 const styles = StyleSheet.create({
+	...generalStyles,
 	card: {
 		paddingTop: 20,
-	},
-	white: {
-		color: "white",
-	},
-	green: {
-		color: "green",
 	},
 	optionContainer: {
 		backgroundColor: "#181D36",

@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import { Button, Title, Paragraph } from "react-native-paper"
 
 import Images from "~assets/images"
+import { generalStyles } from "../../utils/styling"
 
 const ResultsDisplay = props => {
 	const {
@@ -47,9 +48,9 @@ const ResultsDisplay = props => {
 			</View>
 
 			<View style={styles.row}>
-				<Paragraph style={styles.whiteText}>
+				<Paragraph style={{ ...styles.whiteText, textAlign: "center" }}>
 					You have successfully completed the {category.name} quiz on{" "}
-					{difficulty} mode
+					{difficulty} difficulty mode.
 				</Paragraph>
 			</View>
 
@@ -89,22 +90,16 @@ const ResultsDisplay = props => {
 }
 
 const styles = StyleSheet.create({
+	...generalStyles,
 	container: {
-		backgroundColor: "#141A33",
-		flex: 1,
+		...generalStyles.container,
 		paddingVertical: 5,
 		paddingHorizontal: 12,
 	},
 	row: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		alignItems: "center",
+		...generalStyles.row,
 		justifyContent: "center",
 		width: "100%",
-	},
-	whiteText: {
-		color: "white",
-		textAlign: "center",
 	},
 	image: {
 		height: 170,

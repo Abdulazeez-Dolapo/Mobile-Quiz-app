@@ -18,6 +18,7 @@ import QuizCard from "../../containers/QuizCard"
 import Timer from "../Utils/Timer"
 import Modal from "../Utils/Modal"
 import ErrorDisplay from "../ErrorDisplay"
+import { generalStyles } from "../../utils/styling"
 
 const QuizDisplay = props => {
 	// Disable back button
@@ -115,7 +116,6 @@ const QuizDisplay = props => {
 	}
 
 	const handleQuizSubmit = async () => {
-		console.log(questions)
 		hideModal()
 		await compileResults()
 		navigation.navigate("Results")
@@ -127,7 +127,7 @@ const QuizDisplay = props => {
 		<>
 			<View>
 				<View style={{ ...styles.row, ...styles.timer }}>
-					<Timer submit={handleQuizSubmit} minutes={100} seconds={0} />
+					<Timer submit={handleQuizSubmit} minutes={10} seconds={0} />
 
 					<Button
 						mode="text"
@@ -139,13 +139,15 @@ const QuizDisplay = props => {
 					</Button>
 				</View>
 
-				<Subheading style={{ ...styles.gray }}>
+				<Subheading style={{ ...styles.grayText }}>
 					{category.name} Quiz
 				</Subheading>
 
-				<Title style={{ ...styles.white }}>
+				<Title style={{ ...styles.whiteText }}>
 					Question {index + 1 < 10 ? `0${index + 1}` : `${index + 1}`}
-					<Title style={{ ...styles.gray }}>/{numberOfQuestions}</Title>
+					<Title style={{ ...styles.grayText }}>
+						/{numberOfQuestions}
+					</Title>
 				</Title>
 
 				<QuizCard quiz={currentQuiz} />
@@ -164,7 +166,9 @@ const QuizDisplay = props => {
 							size={15}
 							color="white"
 						/>
-						<Subheading style={{ ...styles.white }}>Previous</Subheading>
+						<Subheading style={{ ...styles.whiteText }}>
+							Previous
+						</Subheading>
 					</Button>
 
 					<Button
@@ -175,7 +179,7 @@ const QuizDisplay = props => {
 						uppercase={false}
 						onPress={() => next()}
 					>
-						<Subheading style={{ ...styles.white }}>Next</Subheading>
+						<Subheading style={{ ...styles.whiteText }}>Next</Subheading>
 						<FontAwesome5
 							name="angle-double-right"
 							size={15}
@@ -192,7 +196,9 @@ const QuizDisplay = props => {
 						uppercase={false}
 						onPress={() => openSubmitModal()}
 					>
-						<Subheading style={{ ...styles.white }}>Submit</Subheading>
+						<Subheading style={{ ...styles.whiteText }}>
+							Submit
+						</Subheading>
 						<FontAwesome5 name="check-double" size={15} color="white" />
 					</Button>
 				</View>
@@ -222,26 +228,18 @@ const QuizDisplay = props => {
 }
 
 const styles = StyleSheet.create({
+	...generalStyles,
 	container: {
-		backgroundColor: "#141A33",
-		flex: 1,
+		...generalStyles.container,
 		paddingVertical: 5,
 		paddingHorizontal: 12,
 	},
 	row: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		alignItems: "center",
+		...generalStyles.row,
 		justifyContent: "space-evenly",
 	},
 	timer: {
 		justifyContent: "space-between",
-	},
-	gray: {
-		color: "gray",
-	},
-	white: {
-		color: "white",
 	},
 	controls: {
 		flexDirection: "row",

@@ -1,7 +1,9 @@
 import React from "react"
 import { ScrollView, StyleSheet, View, Pressable } from "react-native"
 import PropTypes from "prop-types"
+
 import CategoryCard from "../Cards/CategoryCard"
+import { generalStyles } from "../../utils/styling"
 
 const SelectCategory = props => {
 	const { navigation, setCategory, categories } = props
@@ -22,21 +24,16 @@ const SelectCategory = props => {
 	))
 
 	return (
-		<ScrollView style={styles.categoryContainer}>
+		<ScrollView style={styles.container}>
 			<View style={styles.row}>{list}</View>
 		</ScrollView>
 	)
 }
 
 const styles = StyleSheet.create({
-	categoryContainer: {
-		backgroundColor: "#141A33",
-		flex: 1,
-	},
+	...generalStyles,
 	row: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		alignItems: "center",
+		...generalStyles.row,
 		justifyContent: "space-evenly",
 	},
 	cardContainer: {
