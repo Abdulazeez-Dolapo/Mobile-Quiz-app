@@ -18,6 +18,7 @@ const images = {
 	comic: require("./categories/comic.png"),
 	cartoon: require("./categories/cartoon.png"),
 	computer: require("./categories/computer.png"),
+	trophy: require("./background/trophy.png"),
 }
 
 export default images

@@ -121,10 +121,8 @@ const QuizDisplay = props => {
 	}
 
 	const markup = loading ? (
-		// <View style={styles.loading}>
 		<ActivityIndicator animating={loading} color="red" size={200} />
-	) : // </View>
-	questions.length > 0 ? (
+	) : questions.length > 0 ? (
 		<>
 			<View>
 				<View style={{ ...styles.row, ...styles.timer }}>
