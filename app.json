@@ -1,26 +1,26 @@
 {
-  "expo": {
-    "name": "quiz-app",
-    "slug": "quiz-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+	"expo": {
+		"name": "Quiz App",
+		"slug": "quiz-app",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/splash.png",
+		"splash": {
+			"image": "./assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ccc"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"web": {
+			"favicon": "./assets/splash.png"
+		},
+		"description": "A quiz app where you can choose your desired difficulty as well as the category you'd like to be quizzed upon.",
+		"githubUrl": "https://github.com/Abdulazeez-Dolapo/Mobile-Quiz-app"
+	}
 }
