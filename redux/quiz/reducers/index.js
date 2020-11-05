@@ -110,14 +110,19 @@ const initialState = {
 			icon: Images.cartoon,
 		},
 		{
+			value: 13,
+			name: "Musicals and Theatres",
+			icon: Images.music,
+		},
+		{
 			value: 18,
 			name: "Computers",
 			icon: Images.computer,
 		},
+
 		// { value: 19, name: "Science: Mathematics" },
 		// { value: 24, name: "Politics" },
 		// { value: 25, name: "Arts" },
-		// { value: 13, name: "Musicals and Theatres" },
 		// { value: 30, name: "Science: Gadgets" },
 	],
 	errors: [],

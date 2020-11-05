@@ -1,8 +1,11 @@
 import React, { useEffect } from "react"
-import { View, Text, BackHandler } from "react-native"
+import { View, BackHandler, StyleSheet, Image, Text } from "react-native"
 import PropTypes from "prop-types"
 
-import { Button } from "react-native-paper"
+import { Button, Title, Paragraph } from "react-native-paper"
+
+import Images from "~assets/images"
+import { generalStyles } from "../../utils/styling"
 
 const ResultsDisplay = props => {
 	const {
@@ -25,43 +28,89 @@ const ResultsDisplay = props => {
 			BackHandler.removeEventListener("hardwareBackPress", backAction)
 	}, [])
 
-	const viewCorrectAnswers = () => {
-		navigation.navigate("Correct-Answers")
-	}
-
 	const reset = async () => {
 		await quitQuiz()
 		navigation.navigate("Mode")
 	}
 
 	return (
-		<View>
-			<Text>Congratulations! You completed the quiz</Text>
+		<View style={styles.container}>
+			<View style={styles.row}>
+				<Title style={styles.whiteText}>Quiz Result</Title>
+			</View>
 
-			<Text>Category: {category.name}</Text>
+			<View style={{ ...styles.row, paddingVertical: 30 }}>
+				<Image source={Images.trophy} style={styles.image} />
+			</View>
 
-			<Text>Difficulty: {difficulty}</Text>
+			<View style={styles.row}>
+				<Title style={styles.whiteText}>Congratulations!</Title>
+			</View>
 
-			<Text>
-				{score}/{numberOfQuestions}
-			</Text>
+			<View style={styles.row}>
+				<Paragraph style={{ ...styles.whiteText, textAlign: "center" }}>
+					You have successfully completed the {category.name} quiz on{" "}
+					{difficulty} difficulty mode.
+				</Paragraph>
+			</View>
 
-			<View>
-				<Button
-					color="blue"
-					mode="contained"
-					onPress={() => viewCorrectAnswers()}
+			<View style={{ ...styles.row, paddingVertical: 10 }}>
+				<Paragraph style={{ color: "grey" }}>Your Score</Paragraph>
+			</View>
+
+			<View
+				style={{
+					...styles.row,
+					paddingBottom: 20,
+				}}
+			>
+				<Text style={{ color: "green", fontSize: 30, fontWeight: "bold" }}>
+					{score}
+				</Text>
+				<Text
+					style={{ ...styles.whiteText, fontSize: 30, fontWeight: "bold" }}
 				>
-					View answers
-				</Button>
+					/{numberOfQuestions}
+				</Text>
+			</View>
 
-				<Button color="green" mode="contained" onPress={() => reset()}>
-					Take new quiz
+			<View style={styles.row}>
+				<Button
+					uppercase={false}
+					mode="contained"
+					style={styles.buttons}
+					color="#3DD3F6"
+					onPress={() => reset()}
+				>
+					<Paragraph style={styles.whiteText}>Start New Quiz</Paragraph>
 				</Button>
 			</View>
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	...generalStyles,
+	container: {
+		...generalStyles.container,
+		paddingVertical: 5,
+		paddingHorizontal: 12,
+	},
+	row: {
+		...generalStyles.row,
+		justifyContent: "center",
+		width: "100%",
+	},
+	image: {
+		height: 170,
+		width: 128,
+	},
+	buttons: {
+		width: 140,
+		height: 45,
+		borderRadius: 10,
+	},
+})
 
 ResultsDisplay.propTypes = {
 	numberOfQuestions: PropTypes.number.isRequired,

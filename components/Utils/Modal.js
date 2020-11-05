@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { View, StyleSheet } from "react-native"
 
 import { Modal, Portal, Subheading, Button, Provider } from "react-native-paper"
+import { generalStyles } from "../../utils/styling"
 
 const QuizModal = props => {
 	const { modalText, handleConfirmation, modalStatus, setModalStatus } = props
@@ -59,10 +60,9 @@ const QuizModal = props => {
 }
 
 const styles = StyleSheet.create({
+	...generalStyles,
 	row: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		alignItems: "center",
+		...generalStyles.row,
 		justifyContent: "space-evenly",
 	},
 	buttons: {
